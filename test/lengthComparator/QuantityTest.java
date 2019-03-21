@@ -32,8 +32,8 @@ class QuantityTest {
 
   @Test
   void shouldReturnFalseIfTwoInchAreNotEqual() {
-    Quantity quantity = new Quantity(new BigDecimal(1), Unit.FEET);
-    Quantity quantity1 = new Quantity(new BigDecimal(3), Unit.FEET);
+    Quantity quantity = new Quantity(new BigDecimal(1), Unit.INCH);
+    Quantity quantity1 = new Quantity(new BigDecimal(3), Unit.INCH);
     assertFalse(quantity.compare(quantity1));
   }
 
@@ -83,8 +83,8 @@ class QuantityTest {
   @Test
   void shouldReturnTrueIfFeetAndMmAreEqual() {
     Quantity quantity = new Quantity(new BigDecimal(1), Unit.FEET);
-    Quantity quantity1 = new Quantity(new BigDecimal(25), Unit.MM);
-    assertFalse(quantity.compare(quantity1));
+    Quantity quantity1 = new Quantity(new BigDecimal(300), Unit.MM);
+    assertTrue(quantity.compare(quantity1));
   }
-  
+
 }
