@@ -2,13 +2,28 @@ package unitConvertion;
 
 import java.math.BigDecimal;
 
-public class Length implements Quantity{
+class Length implements Quantity {
   private BigDecimal value;
   private LengthUnits conversionFactor;
 
   Length(BigDecimal value, LengthUnits unit) {
     this.value = value;
     this.conversionFactor = unit;
+  }
+
+  @Override
+  public BigDecimal convertToBase() {
+    return conversionFactor.calculateBaseValue(this.value);
+  }
+
+  @Override
+  public boolean equals(Object anotherLength) {
+    if (this == anotherLength) return true;
+    if (anotherLength == null || getClass() != anotherLength.getClass()) return false;
+    Length length = (Length) anotherLength;
+    BigDecimal baseOfThis = this.convertToBase();
+    BigDecimal baseOfAnotherVolume = length.convertToBase();
+    return baseOfThis.equals(baseOfAnotherVolume);
   }
 
   enum LengthUnits {
@@ -26,21 +41,6 @@ public class Length implements Quantity{
     BigDecimal calculateBaseValue(BigDecimal value1) {
       return BigDecimal.valueOf(this.value.multiply(value1).intValue());
     }
-  }
-
-  @Override
-  public BigDecimal convertToBase() {
-    return conversionFactor.calculateBaseValue(this.value);
-  }
-
-  @Override
-  public boolean equals(Object anotherLength) {
-    if (this == anotherLength) return true;
-    if (anotherLength == null || getClass() != anotherLength.getClass()) return false;
-    Length length = (Length) anotherLength;
-    BigDecimal baseOfThis = this.convertToBase();
-    BigDecimal baseOfAnotherVolume = length.convertToBase();
-    return baseOfThis.equals(baseOfAnotherVolume);
   }
 
 }

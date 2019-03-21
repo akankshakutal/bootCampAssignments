@@ -13,22 +13,7 @@ public class Volume implements Quantity {
 
   @Override
   public BigDecimal convertToBase() {
-    return conversionFactor.calculateBaseValue(value);
-  }
-
-  enum VolumeUnits {
-    GALLON(new BigDecimal(0.264172)),
-    LITER(new BigDecimal(1));
-
-    private BigDecimal value;
-
-    BigDecimal calculateBaseValue(BigDecimal value1) {
-      return BigDecimal.valueOf(this.value.multiply(value1).floatValue());
-    }
-
-    VolumeUnits(BigDecimal value) {
-      this.value = value;
-    }
+    return conversionFactor.calculateBaseValue(this.value);
   }
 
   @Override
@@ -39,6 +24,21 @@ public class Volume implements Quantity {
     BigDecimal baseOfThis = this.convertToBase();
     BigDecimal baseOfAnotherVolume = volume.convertToBase();
     return baseOfThis.equals(baseOfAnotherVolume);
+  }
+
+  enum VolumeUnits {
+    GALLON(new BigDecimal(0.264172)),
+    LITER(new BigDecimal(1));
+
+    private BigDecimal value;
+
+    VolumeUnits(BigDecimal value) {
+      this.value = value;
+    }
+
+    BigDecimal calculateBaseValue(BigDecimal value1) {
+      return BigDecimal.valueOf(this.value.multiply(value1).floatValue());
+    }
   }
 
 }
