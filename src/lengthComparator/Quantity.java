@@ -13,27 +13,22 @@ class Quantity {
   }
 
   boolean compare(Quantity other) {
-    if(!this.unit.ofSameType(other.unit)) {
-      return false;
-    }
-
-    return unit.convertToBase(this.value).equals(other.unit.convertToBase(other.value));
+    return this.unit.convertToBase(this.value).equals(other.unit.convertToBase(other.value));
   }
 
   @Override
   public boolean equals(Object other) {
+    if (!(other instanceof Quantity)) return false;
     if (this == other) return true;
-    if (other == null || getClass() != other.getClass()) return false;
+    if (this.getClass() != other.getClass()) return false;
     Quantity quantity = (Quantity) other;
     return Objects.equals(value, quantity.value) &&
             Objects.equals(unit, quantity.unit);
   }
 
-  Quantity add(Quantity other) throws TypeNotMatchException{
-    if(!this.unit.ofSameType(other.unit)) {
-      throw new TypeNotMatchException();
-    }
-
-    return new Quantity(this.value.add(other.value), this.unit);
+  Quantity add(Quantity other) {
+    BigDecimal thisQuantityInBase = this.unit.convertToBase(this.value);
+    BigDecimal otherQuantityInBase = other.unit.convertToBase(other.value);
+    return new Quantity(thisQuantityInBase.add(otherQuantityInBase), unit.STANDARD);
   }
 }
