@@ -33,8 +33,8 @@ class VolumeTest {
   @Test
   void shouldReturnTrueIfTwoLiterAreEqual() {
     Quantity oneGallon = new Volume(new BigDecimal(2), Volume.VolumeUnits.LITER);
-    Quantity liter = new Volume(new BigDecimal(0.26), Volume.VolumeUnits.LITER);
-    assertNotEquals(oneGallon, liter);
+    Quantity liter = new Volume(new BigDecimal(2), Volume.VolumeUnits.LITER);
+    assertEquals(oneGallon, liter);
   }
 
   @Test
