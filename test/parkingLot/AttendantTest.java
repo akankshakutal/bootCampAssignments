@@ -22,12 +22,24 @@ class AttendantTest {
     attendant.addParkingLot(parkingLot);
 
     attendant.park(new Car(1234));
-    assertTrue(parkingLot.isCalled);
+    assertTrue(parkingLot.isParkCalled);
+  }
+
+  @Test
+  void shouldUnParkCar() throws ParkingLotFull {
+    Attendant attendant = new Attendant();
+    MockParkingLot parkingLot = new MockParkingLot(5, 1, attendant);
+    attendant.addParkingLot(parkingLot);
+
+    attendant.park(new Car(1234));
+    attendant.unpark(1234);
+    assertTrue(parkingLot.isUnParkCalled);
   }
 }
 
 class MockParkingLot extends ParkingLot{
-  boolean isCalled;
+  boolean isParkCalled;
+  boolean isUnParkCalled;
 
   MockParkingLot(int size, int id, Attendant attendant) {
     super(size, id, attendant);
@@ -35,7 +47,12 @@ class MockParkingLot extends ParkingLot{
 
   @Override
   int park(Car car) {
-    this.isCalled = true;
+    this.isParkCalled = true;
     return 0;
+  }
+
+  Car unPark(int carId){
+    this.isUnParkCalled = true;
+    return null;
   }
 }

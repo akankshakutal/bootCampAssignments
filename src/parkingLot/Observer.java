@@ -1,5 +1,7 @@
 package parkingLot;
 
 interface Observer {
-  void update(ParkingLot parkingLot);
+  void parkingLotIsFull(ParkingLot parkingLot);
+
+  void parkingLotIsFree(ParkingLot parkingLot);
 }

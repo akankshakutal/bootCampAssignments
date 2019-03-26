@@ -19,8 +19,18 @@ class ParkingLot {
   int park(Car car) throws ParkingLotFull {
     if (isFull()) throw new ParkingLotFull();
     parkingLot.add(car);
-    if (isFull()) attendant.update(this);
+    if (isFull()) attendant.parkingLotIsFull(this);
     return parkingLot.indexOf(car);
+  }
+
+  Car unPark(int carNumber) {
+    for (Car car : parkingLot) {
+      if(car.getCarNumber() == carNumber && isFull()){
+        attendant.parkingLotIsFree(this);
+        return car;
+      }
+    }
+    return null;
   }
 
   int getId() {

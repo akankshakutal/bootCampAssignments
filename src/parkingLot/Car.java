@@ -7,4 +7,8 @@ class Car {
   Car(int carNumber) {
     this.carNumber = carNumber;
   }
+
+  public int getCarNumber() {
+    return carNumber;
+  }
 }
