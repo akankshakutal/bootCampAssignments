@@ -6,24 +6,20 @@ import java.util.List;
 class Attendant implements Observer {
   private List<ParkingLot> parkingLots;
   private List<ParkingLot> availableParkingLots;
-  private List<ParkingLot> fullParkingLots;
 
   Attendant() {
     availableParkingLots = new ArrayList<>();
-    fullParkingLots = new ArrayList<>();
     parkingLots = new ArrayList<>();
   }
 
   @Override
   public void parkingLotIsFull(ParkingLot parkingLot) {
     availableParkingLots.remove(parkingLot);
-    fullParkingLots.add(parkingLot);
     System.out.println("Parking lot " + parkingLot.getId() + " is Full");
   }
 
   @Override
   public void parkingLotIsFree(ParkingLot parkingLot) {
-    fullParkingLots.remove(parkingLot);
     availableParkingLots.add(parkingLot);
     System.out.println("Parking lot " + parkingLot.getId() + " is free");
 
@@ -38,10 +34,10 @@ class Attendant implements Observer {
     return availableParkingLots.get(0).park(car);
   }
 
-  Car unpark(int carId) {
-    for (ParkingLot parkingLot:parkingLots) {
+  Car unPark(int carId) {
+    for (ParkingLot parkingLot : parkingLots) {
       Car car = parkingLot.unPark(carId);
-      if(car != null){
+      if (car != null) {
         return car;
       }
     }

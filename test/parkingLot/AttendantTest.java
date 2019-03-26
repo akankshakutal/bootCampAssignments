@@ -32,7 +32,7 @@ class AttendantTest {
     attendant.addParkingLot(parkingLot);
 
     attendant.park(new Car(1234));
-    attendant.unpark(1234);
+    attendant.unPark(1234);
     assertTrue(parkingLot.isUnParkCalled);
   }
 }
