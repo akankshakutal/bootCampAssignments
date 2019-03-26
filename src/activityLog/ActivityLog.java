@@ -15,7 +15,7 @@ class ActivityLog implements Logger {
   @Override
   public List<String> addLog(String message) {
     this.logs.add(message);
-    return Collections.unmodifiableList(this.logs);
+    return this.logs;
   }
 
 }

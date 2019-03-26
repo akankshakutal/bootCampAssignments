@@ -9,27 +9,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ActivityLogTest {
-//  @Test
-//  void shouldAddTheGivenActivity() {
-//    ActivityLog activityLog = new ActivityLog();
-//    activityLog.add(new activityLogWithoutTimeStamp("First activity"));
-//    List<Log> actualLogs = activityLog.getActivityLogs();
-//
-//    ArrayList<Log> expectedLogs = new ArrayList<>();
-//    expectedLogs.add(new activityLogWithoutTimeStamp("First activity"));
-//
-//    assertEquals(expectedLogs,actualLogs);
-//  }
-//
-//  @Test
-//  void shouldReturnLogWithTimeStamp() {
-//    ActivityLog activityLog = new ActivityLog();
-//    activityLog.add(new activityLogWithTimeStamp("First activity",new BigDecimal(12234)));
-//    List<Log> actualLogs = activityLog.getActivityLogs();
-//
-//    ArrayList<activityLogWithTimeStamp> expectedLogs = new ArrayList<>();
-//    expectedLogs.add(new activityLogWithTimeStamp("First activity",new BigDecimal(12234)));
-//
-//    assertEquals(expectedLogs,actualLogs);
-//  }
+
+  @Test
+  void shouldReturnStringOfGivenText() {
+    ActivityLog activityLog = new ActivityLog();
+    List<Object> expected = new ArrayList<>();
+    expected.add("First Log");
+    assertEquals(expected,activityLog.addLog("First Log"));
+  }
+
+  @Test
+  void shouldReturnStringWithTime() {
+    ActivityLog activityLog = new ActivityLog();
+    ActivityLogWithSeconds logger = new ActivityLogWithSeconds(activityLog);
+    List<Object> expected = new ArrayList<>();
+    expected.add("9123 First Log");
+    assertEquals(expected,logger.addLog("First Log"));
+  }
 }
