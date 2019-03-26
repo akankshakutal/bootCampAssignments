@@ -7,22 +7,20 @@ class ParkingLot {
   private int size;
   private int id;
   private Attendant attendant;
-  private List<Car> register;
+  private List<Car> parkingLot;
 
-  ParkingLot(int size,int id, Attendant attendant) {
+  ParkingLot(int size, int id, Attendant attendant) {
     this.size = size;
     this.id = id;
     this.attendant = attendant;
-    this.register = new ArrayList<>(this.size);
+    this.parkingLot = new ArrayList<>(this.size);
   }
 
-  int park(Car car) {
-    if (isFull()) {
-      attendant.notify(this);
-      return -1;
-    }
-    register.add(car);
-    return register.indexOf(car);
+  int park(Car car) throws ParkingLotFull {
+    if (isFull()) throw new ParkingLotFull();
+    parkingLot.add(car);
+    if (isFull()) attendant.update(this);
+    return parkingLot.indexOf(car);
   }
 
   int getId() {
@@ -30,6 +28,6 @@ class ParkingLot {
   }
 
   private boolean isFull() {
-    return register.size() == this.size;
+    return parkingLot.size() == this.size;
   }
 }

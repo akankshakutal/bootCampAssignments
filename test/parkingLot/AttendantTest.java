@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AttendantTest {
   @Test
-  void shouldParkCarInParkingLot() {
+  void shouldParkCarInParkingLot() throws ParkingLotFull {
     Attendant attendant = new Attendant();
     int parkingLotId = 1;
     ParkingLot parkingLot = new ParkingLot(5, parkingLotId, attendant);
@@ -16,7 +16,7 @@ class AttendantTest {
   }
 
   @Test
-  void shouldParkCarInFreeParkingLot() {
+  void shouldParkCarInFreeParkingLot() throws ParkingLotFull {
     Attendant attendant = new Attendant();
     MockParkingLot parkingLot = new MockParkingLot(5, 1, attendant);
     attendant.addParkingLot(parkingLot);

@@ -3,7 +3,7 @@ package parkingLot;
 import java.util.ArrayList;
 import java.util.List;
 
-class Attendant {
+class Attendant implements Observer {
   private List<ParkingLot> availableParkingLots;
   private List<ParkingLot> fullParkingLots;
 
@@ -12,17 +12,18 @@ class Attendant {
     fullParkingLots = new ArrayList<>();
   }
 
-  void notify(ParkingLot parkingLot) {
+  @Override
+  public void update(ParkingLot parkingLot) {
     availableParkingLots.remove(parkingLot);
     fullParkingLots.add(parkingLot);
-    System.out.println("Parking lot is full");
+    System.out.println("Notified by " + parkingLot.getId());
   }
 
   void addParkingLot(ParkingLot parkingLot) {
     this.availableParkingLots.add(parkingLot);
   }
 
-  int park(Car car) {
+  int park(Car car) throws ParkingLotFull {
     return availableParkingLots.get(0).park(car);
   }
 }
